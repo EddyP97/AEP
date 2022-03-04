@@ -3,7 +3,7 @@ package edu.berkeley.aep;
 
 //Understands different types of measurement with same value
 
-public class UnitComparator {
+public class UnitComparator implements Bestable<UnitComparator> {
     private final int value;
     private final Units unit;
 
@@ -52,6 +52,7 @@ public class UnitComparator {
         };
     }
 
+    @Override
     public boolean betterThan(UnitComparator other) {
         if (!unit.checkTypeSame(other.unit)) {
             throw new RuntimeException();

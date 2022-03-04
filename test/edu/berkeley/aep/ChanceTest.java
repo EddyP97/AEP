@@ -32,7 +32,35 @@ public class ChanceTest {
         assertEquals("Heads!", coinTosses.get(new Chance(1d/2d)));
     }
 
+    @Test
+    public void oneHalfIsTheBestChance() {
+        var oneHalf = new Chance(1d/2d);
+        var oneThird = new Chance(1d/3d);
+        var oneSixth = new Chance(1d/6d);
 
-    //
-    //write an implementation for not() - the probability of an event not occurring.
+        assertEquals(oneHalf, new BestQuantity(oneHalf,oneSixth,oneThird).bestQuantity());
+    }
+
+    @Test
+    public void oneThirdIsNotTheBestChance() {
+        var oneHalf = new Chance(1d/2d);
+        var oneThird = new Chance(1d/3d);
+        var oneSixth = new Chance(1d/6d);
+
+        assertNotEquals(oneThird, new BestQuantity(oneHalf,oneSixth,oneThird).bestQuantity());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void probabilityCanNotBeMeasuredAgainstMeasurement() {
+        var oneHalf = new Chance(1d/2d);
+        var oneInch = new UnitComparator(1, Units.INCH);
+        var oneSixth = new Chance(1d/6d);
+
+        assertEquals(oneInch, new BestQuantity(oneHalf,oneSixth,oneInch).bestQuantity());
+    }
+
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
+    public void canNotFindTheBestOfAnEmptyList() {
+        assertNotEquals(1, new BestQuantity().bestQuantity());
+    }
 }
