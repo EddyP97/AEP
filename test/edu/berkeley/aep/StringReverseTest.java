@@ -8,19 +8,25 @@ public class StringReverseTest {
 
     @Test
     public void reverseEmptyString() {
-        var emptyString = new reverseEmpty("");
-        assertEquals("", emptyString.reverse());
+        var emptyString = new StringReverse();
+        assertEquals("", emptyString.reverse(""));
     }
 
     @Test
     public void reverseOneLetterString() {
-        var emptyString = new reverseEmpty("a");
-        assertEquals("a", emptyString.reverse());
+        var oneLetterString = new StringReverse();
+        assertEquals("a", oneLetterString.reverse("a"));
     }
 
     @Test
     public void reverseTwoLetterString() {
-        var emptyString = new reverseEmpty("ab");
-        assertEquals("ba", emptyString.reverse());
+        var twoLetterString = new StringReverse();
+        assertEquals("ba", twoLetterString.reverse("ab"));
+    }
+
+    @Test
+    public void reverseFourLetterString() {
+        var fourLetterString = new StringReverse();
+        assertEquals("dcba", fourLetterString.reverse("abcd"));
     }
 }
